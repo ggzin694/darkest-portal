@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Darkest · Portal da Empresa</title><!-- build2 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/lucide@1/dist/umd/lucide.min.js"></script>
+<style>
+:root{
+  --bg:#1c1f2e; --card:#262a3a; --text:#e8ecf4; --muted:#8b9ab8;
+  --accent:#c9923c; --accent-soft:rgba(201,146,60,.14); --accent-light:#e0b368;
+  --accent2:#4d8b7a; --accent2-soft:rgba(77,139,122,.14);
+  --border:rgba(139,154,184,.16);
+  --danger:#e05b5b; --danger-soft:rgba(224,91,91,.14);
+  --good:#4d8b7a; --good-soft:rgba(77,139,122,.14);
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);min-height:100vh}
+body{
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:radial-gradient(1100px 500px at 15% -10%, rgba(201,146,60,.10), transparent 55%), var(--bg);
+  line-height:1.5;
+}
+.font-display{font-family:"Cormorant Garamond",Georgia,serif}
+.tnum{font-variant-numeric:tabular-nums}
+.hidden{display:none!important}
+.app{max-width:1180px;margin:0 auto;padding:26px 20px 60px}
+
+/* ---------- Login ---------- */
+.login-wrap{padding:64px 16px 40px;display:flex;align-items:flex-start;justify-content:center}
+.login-card{width:100%;max-width:420px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:34px 30px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.login-brand{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.login-brand .mark{width:42px;height:42px;border-radius:11px;background:var(--accent-soft);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent);flex:none}
+.login-brand .name{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.login-brand h2{font-size:26px;font-weight:600;font-family:"Cormorant Garamond",serif;line-height:1.1}
+.form-field{margin-bottom:14px}
+.form-field label{display:block;font-size:11.5px;color:var(--muted);font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em}
+.form-field input,.form-field select,.form-field textarea{
+  width:100%;background:#161824;border:1px solid var(--border);border-radius:10px;
+  padding:11px 13px;color:var(--text);font-size:14px;outline:none;transition:border-color .15s;font-family:inherit;
+}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--accent)}
+.btn{border:0;border-radius:10px;padding:11px 18px;font-size:13.5px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .15s ease;font-family:inherit;width:100%}
+.btn-gold{background:linear-gradient(135deg,var(--accent-light),var(--accent));color:#1c1f2e}
+.btn-gold:hover{filter:brightness(1.08)}
+.btn-secondary{background:var(--card);border:1px solid var(--border);color:var(--text);width:auto}
+.btn-secondary:hover{border-color:var(--muted)}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border);width:auto}
+.btn-ghost:hover{color:var(--text)}
+.btn-danger{background:var(--danger-soft);border:1px solid var(--danger);color:#f3c4c4;width:auto}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.link-btn{background:transparent;border:0;color:var(--accent);cursor:pointer;font-size:13px;font-weight:600;padding:0;margin-top:6px}
+.link-btn:hover{text-decoration:underline}
+.form-error{color:#f3a5a5;font-size:12.5px;margin-top:4px;min-height:16px}
+.account-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.account-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--border);border-radius:11px;cursor:pointer;transition:all .15s;background:#161824}
+.account-item:hover{border-color:var(--accent)}
+.account-item.active{border-color:var(--accent);background:var(--accent-soft)}
+.avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent-light),var(--accent));color:#1c1f2e;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex:none;text-transform:uppercase}
+.avatar.emp{background:linear-gradient(135deg,#7ba8b8,#4d8b7a)}
+.account-item .nm{font-weight:600;font-size:14px}
+.account-item .rl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.role-badge{font-size:10.5px;padding:2px 8px;border-radius:999px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.role-badge.dono{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent)}
+.role-badge.func{background:rgba(139,154,184,.12);color:var(--muted);border:1px solid var(--border)}
+
+/* ---------- App header ---------- */
+.header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-bottom:20px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .mark{width:40px;height:40px;border-radius:11px;background:var(--accent-soft);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent);flex:none}
+.brand .name{font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.brand h1{font-size:24px;font-weight:600;font-family:"Cormorant Garamond",serif;line-height:1.1}
+.user-box{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:7px 12px}
+.user-box .un{font-size:13px;font-weight:600}
+.logout-btn{background:transparent;border:0;color:var(--muted);cursor:pointer;padding:5px;border-radius:6px;display:flex}
+.logout-btn:hover{color:var(--danger)}
+
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:5px}
+.tab-btn{border:0;background:transparent;color:var(--muted);padding:9px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:all .15s}
+.tab-btn.active{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent);padding:8px 15px}
+.tab-btn:hover:not(.active){color:var(--text)}
+.tab-btn.owner-only{display:none!important}
+body.is-dono .tab-btn.owner-only{display:inline-flex!important}
+.tab-btn .badge-dot{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 8px var(--good)}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.card h3{font-size:15px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.card h3 .ico{color:var(--accent)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:820px){.grid-2{grid-template-columns:1fr}}
+.muted{color:var(--muted);font-size:13px}
+.stat-big{font-size:34px;font-weight:600;font-family:"Cormorant Garamond",serif;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat-big small{font-size:15px;color:var(--muted);font-weight:500}
+.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);background:transparent;color:var(--muted);padding:6px 14px;border-radius:999px;font-size:12.5px;cursor:pointer;font-weight:500;transition:all .15s}
+.pill.active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
+.pill:hover:not(.active){color:var(--text);border-color:var(--muted)}
+
+/* ---------- Ponto ---------- */
+.clock-display{font-size:44px;font-weight:600;font-family:"Cormorant Garamond",serif;letter-spacing:.02em;font-variant-numeric:tabular-nums;text-align:center;margin:8px 0}
+.ponto-status{text-align:center;font-size:13px;color:var(--muted);margin-bottom:14px}
+.ponto-status.on{color:var(--good)}
+.big-btn{width:100%;padding:16px;font-size:16px;border-radius:12px;border:0;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:filter .15s}
+.big-btn.in{background:linear-gradient(135deg,var(--accent-light),var(--accent));color:#1c1f2e}
+.big-btn.out{background:var(--danger-soft);border:1px solid var(--danger);color:#f3c4c4}
+.big-btn:hover{filter:brightness(1.08)}
+table.tb{width:100%;border-collapse:collapse;font-size:13px;min-width:480px}
+table.tb th{text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.1em;padding:8px 10px;border-bottom:1px solid var(--border);font-weight:600}
+table.tb td{padding:9px 10px;border-bottom:1px solid rgba(139,154,184,.08);font-variant-numeric:tabular-nums}
+table.tb tr:last-child td{border-bottom:0}
+.tb-wrap{overflow-x:auto}
+.pos{color:var(--good)}
+
+/* ---------- Reunião ---------- */
+.meeting-code{font-family:ui-monospace,Menlo,Consolas,monospace;background:#161824;border:1px dashed var(--accent);color:var(--accent);padding:8px 16px;border-radius:9px;font-size:15px;letter-spacing:.15em;font-weight:700;display:inline-block}
+.meeting-timer{font-size:30px;font-weight:600;font-family:"Cormorant Garamond",serif;font-variant-numeric:tabular-nums;color:var(--accent)}
+.live-dot{width:9px;height:9px;border-radius:50%;background:var(--danger);display:inline-block;animation:pulse 1.2s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(224,91,91,.5)}50%{opacity:.6;box-shadow:0 0 0 6px rgba(224,91,91,0)}}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
+.tile{aspect-ratio:4/3;background:linear-gradient(135deg,#2a2f42,#1e2130);border:1px solid var(--border);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden}
+.tile.self{border-color:var(--accent)}
+.tile .av{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent-light),var(--accent));color:#1c1f2e;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;text-transform:uppercase}
+.tile .nm{font-size:13px;font-weight:600}
+.tile .st{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+.tile .mic-off{position:absolute;top:10px;right:10px;background:var(--danger-soft);border:1px solid var(--danger);color:#f3c4c4;padding:4px;border-radius:6px;display:flex}
+.tile.placeholder{border-style:dashed;color:var(--muted);font-size:12.5px;text-align:center;padding:10px}
+.meet-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+.ctrl-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--border);background:#161824;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.ctrl-btn:hover{border-color:var(--muted)}
+.ctrl-btn.off{background:var(--danger);border-color:var(--danger);color:#fff}
+.ctrl-btn.end{width:auto;border-radius:999px;padding:0 20px;background:var(--danger);border-color:var(--danger);color:#fff;font-weight:700;gap:8px}
+.chat-box{background:#161824;border:1px solid var(--border);border-radius:10px;height:220px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
+.chat-msg{font-size:12.5px}
+.chat-msg .au{font-weight:700;color:var(--accent);margin-right:6px}
+.chat-msg .tm{color:var(--muted);font-size:10.5px;margin-left:6px}
+.chat-input-row{display:flex;gap:8px}
+.chat-input-row input{flex:1;background:#161824;border:1px solid var(--border);border-radius:10px;padding:10px 13px;color:var(--text);outline:none;font-size:13px}
+.chat-input-row input:focus{border-color:var(--accent)}
+.chat-input-row button{border:0;border-radius:10px;padding:0 18px;background:var(--accent);color:#1c1f2e;font-weight:700;cursor:pointer}
+.notice{font-size:12px;color:var(--muted);background:rgba(0,0,0,.2);border:1px solid var(--border);border-radius:9px;padding:10px 13px;margin-top:12px}
+
+/* ---------- Anúncios ---------- */
+.anuncio{border-left:3px solid var(--accent);background:rgba(0,0,0,.18);border-radius:0 10px 10px 0;padding:14px 16px;margin-bottom:12px}
+.anuncio .t{font-weight:700;font-size:14px;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.anuncio .m{font-size:13px;color:var(--text);white-space:pre-wrap}
+.anuncio .meta{font-size:11px;color:var(--muted);margin-top:8px}
+.del-link{background:transparent;border:0;color:var(--danger);cursor:pointer;font-size:11.5px;font-weight:600;display:inline-flex;align-items:center;gap:4px}
+.empty-msg{color:var(--muted);font-size:13px;padding:14px 0;text-align:center}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:80;background:var(--card);border:1px solid var(--accent2);color:var(--text);padding:12px 20px;border-radius:11px;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.45);animation:toastIn .3s ease;display:flex;align-items:center;gap:9px}
+.toast.err{border-color:var(--danger);color:#f3c4c4}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(max-width:600px){.eq-form-grid{grid-template-columns:1fr!important}}
+.footer{margin-top:30px;padding-top:16px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;text-align:center}
+</style>
+</head>
+<body>
+
+<!-- ================= LOGIN ================= -->
+<div id="viewLogin" class="login-wrap">
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="mark"><i data-lucide="gem" width="20" height="20"></i></div>
+      <div>
+        <div class="name">Darkest</div>
+        <h2>Portal da Empresa</h2>
+      </div>
+    </div>
+
+    <!-- First run: create owner -->
+    <div id="firstRun">
+      <p class="muted" style="margin-bottom:14px">Primeiro acesso. Crie a conta do <strong style="color:var(--accent)">dono</strong> (voc&ecirc;). Ela poder&aacute; iniciar reuni&otilde;es e gerenciar a equipe.</p>
+      <div class="form-field"><label>Nome completo</label><input id="oNome" placeholder="Seu nome"></div>
+      <div class="form-field"><label>Usu&aacute;rio (login)</label><input id="oUser" placeholder="ex: dono"></div>
+      <div class="form-field"><label>Senha</label><input id="oPass" type="password" placeholder="m&iacute;nimo 4 caracteres"></div>
+      <div class="form-error" id="oErr"></div>
+      <button class="btn btn-gold" id="oBtn"><i data-lucide="shield-check" width="16" height="16"></i>Criar conta de dono</button>
+    </div>
+
+    <!-- Login -->
+    <div id="loginForm" class="hidden">
+      <p class="muted" style="font-size:12px;margin-bottom:10px">Funcion&aacute;rio: selecione seu nome na lista e digite sua senha. Sem conta? Pe&ccedil;a ao dono ou use o link abaixo.</p>
+      <div class="account-list" id="accountList"></div>
+      <div class="form-field"><label>Senha</label><input id="lPass" type="password" placeholder="Digite a senha"></div>
+      <div class="form-error" id="lErr"></div>
+      <button class="btn btn-gold" id="lBtn"><i data-lucide="log-in" width="16" height="16"></i>Entrar</button>
+      <div style="text-align:center;margin-top:10px">
+        <button class="link-btn" id="showRegister">+ Criar nova conta (funcion&aacute;rio)</button>
+      </div>
+    </div>
+
+    <!-- Register employee -->
+    <div id="registerForm" class="hidden">
+      <p class="muted" style="margin-bottom:14px">Nova conta de funcion&aacute;rio. O dono poder&aacute; gerenci&aacute;-la na aba <strong>Equipe</strong>.</p>
+      <div class="form-field"><label>Nome completo</label><input id="rNome" placeholder="Nome do funcion&aacute;rio"></div>
+      <div class="form-field"><label>Usu&aacute;rio (login)</label><input id="rUser" placeholder="ex: joao"></div>
+      <div class="form-field"><label>Senha</label><input id="rPass" type="password" placeholder="m&iacute;nimo 4 caracteres"></div>
+      <div class="form-error" id="rErr"></div>
+      <button class="btn btn-gold" id="rBtn"><i data-lucide="user-plus" width="16" height="16"></i>Criar conta</button>
+      <div style="text-align:center;margin-top:10px"><button class="link-btn" id="backToLogin">← Voltar para o login</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= APP ================= -->
+<div id="viewApp" class="app hidden">
+  <header class="header">
+    <div class="brand">
+      <div class="mark"><i data-lucide="gem" width="19" height="19"></i></div>
+      <div><div class="name">Darkest</div><h1>Portal da Empresa</h1></div>
+    </div>
+    <div class="user-box">
+      <div class="avatar" id="hdrAvatar">D</div>
+      <div><div class="un" id="hdrName">—</div><span class="role-badge" id="hdrRole">funcionário</span></div>
+      <button class="logout-btn" id="logoutBtn" title="Sair"><i data-lucide="log-out" width="17" height="17"></i></button>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn owner-only active" data-tab="inicio"><i data-lucide="home" width="15" height="15"></i>In&iacute;cio</button>
+    <button class="tab-btn owner-only" data-tab="ponto"><i data-lucide="clock" width="15" height="15"></i>Ponto</button>
+    <button class="tab-btn" data-tab="reuniao"><i data-lucide="video" width="15" height="15"></i>Reuni&atilde;o <span id="meetDot" class="badge-dot hidden"></span></button>
+    <button class="tab-btn owner-only" data-tab="equipe"><i data-lucide="users" width="15" height="15"></i>Equipe</button>
+    <button class="tab-btn owner-only" data-tab="anuncios"><i data-lucide="megaphone" width="15" height="15"></i>An&uacute;ncios</button>
+  </nav>
+
+  <!-- Início -->
+  <section id="tab-inicio">
+    <div class="grid-2">
+      <div class="card">
+        <h3><span class="ico"><i data-lucide="sun" width="16" height="16"></i></span>Bom dia, <span id="welcomeName">—</span></h3>
+        <p class="muted" id="todayDate">—</p>
+        <div style="margin-top:16px;display:flex;gap:20px;flex-wrap:wrap">
+          <div><div class="stat-big" id="statHours">0h</div><div class="muted" style="font-size:11.5px">horas hoje</div></div>
+          <div><div class="stat-big" id="statHoursMonth">0h</div><div class="muted" style="font-size:11.5px">horas no m&ecirc;s</div></div>
+          <div><div class="stat-big" id="statTeam">0</div><div class="muted" style="font-size:11.5px">na equipe</div></div>
+        </div>
+        <div id="pontoQuick" style="margin-top:18px"></div>
+      </div>
+      <div class="card">
+        <h3><span class="ico"><i data-lucide="megaphone" width="16" height="16"></i></span>&Uacute;ltimos an&uacute;ncios</h3>
+        <div id="anunciosHome"></div>
+      </div>
+    </div>
+    <div class="card" id="meetBanner"></div>
+  </section>
+
+  <!-- Ponto -->
+  <section id="tab-ponto" class="hidden">
+    <div class="grid-2">
+      <div class="card" style="text-align:center">
+        <h3 style="justify-content:center"><span class="ico"><i data-lucide="clock" width="16" height="16"></i></span>Rel&oacute;gio de ponto</h3>
+        <div class="clock-display tnum" id="clockNow">--:--:--</div>
+        <div class="ponto-status" id="pontoStatus">Voc&ecirc; n&atilde;o est&aacute; em hor&aacute;rio de trabalho.</div>
+        <div id="elapsedWrap" class="hidden" style="margin-bottom:14px">
+          <div class="muted" style="font-size:11.5px;text-transform:uppercase;letter-spacing:.1em">Tempo na atividade</div>
+          <div class="stat-big tnum" id="elapsedTime" style="color:var(--good)">00:00:00</div>
+        </div>
+        <button class="big-btn in" id="pontoBtn"><i data-lucide="log-in" width="18" height="18"></i><span id="pontoBtnText">Bater ponto — Entrada</span></button>
+      </div>
+      <div class="card">
+        <h3><span class="ico"><i data-lucide="calendar-days" width="16" height="16"></i></span>Meu hist&oacute;rico <span id="teamToggleWrap" class="hidden" style="margin-left:auto"></span></h3>
+        <div class="tb-wrap"><table class="tb" id="pontoTable"><thead><tr><th>Data</th><th>Entrada</th><th>Sa&iacute;da</th><th>Total</th></tr></thead><tbody></tbody></table></div>
+        <div id="pontoEmpty" class="empty-msg hidden">Nenhum registro ainda. Bate o ponto de entrada para come&ccedil;ar.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reunião -->
+  <section id="tab-reuniao" class="hidden">
+    <div class="card" id="meetCard"></div>
+  </section>
+
+  <!-- Equipe -->
+  <section id="tab-equipe" class="hidden">
+    <div class="card">
+      <div id="eqFormWrap"></div>
+      <h3><span class="ico"><i data-lucide="users" width="16" height="16"></i></span>Equipe <span class="muted" style="font-size:12px;font-weight:500;margin-left:auto" id="equipeHint"></span></h3>
+      <div class="tb-wrap"><table class="tb" id="equipeTable"><thead><tr><th>Nome</th><th>Usu&aacute;rio</th><th>Cargo</th><th>Horas no m&ecirc;s</th><th></th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- Anúncios -->
+  <section id="tab-anuncios" class="hidden">
+    <div class="card" id="anunciosCard"></div>
+  </section>
+
+  <div class="footer">Darkest · Portal da Empresa — sistema local (localStorage). Dados ficam neste navegador.</div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script>
+(function(){
+"use strict";
+var KEY = "darkest_portal_v1", SESS_KEY = "darkest_portal_session";
+var state = { db: loadDB(), session: loadSession(), tab: "inicio", inMeeting: false, mic: true, cam: true };
+var toastTimer = null, clockTimer = null;
+
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function hash(s){ try{ return btoa(unescape(encodeURIComponent(String(s)))); }catch(e){ return String(s); } }
+function nowISO(){ return new Date().toISOString(); }
+function todayStr(){ var d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function fmtHM(d){ return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"); }
+function fmtDur(min){ if(min==null) return "—"; var h=Math.floor(min/60), m=Math.round(min%60); return h+"h"+String(m).padStart(2,"0"); }
+function initials(n){ n=String(n||"?").trim().split(/\s+/); return (n[0]?n[0][0]:"?")+(n.length>1?n[n.length-1][0]:"").toUpperCase(); }
+function isDono(){ var u=currentUser(); return !!(u && u.role==="dono"); }
+function currentUser(){ if(!state.session) return null; return state.db.accounts.find(function(a){return a.id===state.session.userId;}) || null; }
+
+function loadDB(){
+  try{ var raw=localStorage.getItem(KEY); if(raw){ var d=JSON.parse(raw); if(d && Array.isArray(d.accounts)) return {accounts:d.accounts||[], meeting:d.meeting||null, ponto:d.ponto||[], anuncios:d.anuncios||[]}; } }catch(e){}
+  return {accounts:[], meeting:null, ponto:[], anuncios:[]};
+}
+function saveDB(){ try{ localStorage.setItem(KEY, JSON.stringify(state.db)); }catch(e){ showToast("Erro ao salvar.", true); } }
+function loadSession(){ try{ return JSON.parse(localStorage.getItem(SESS_KEY)) || null; }catch(e){ return null; } }
+function saveSession(){ try{ if(state.session) localStorage.setItem(SESS_KEY, JSON.stringify(state.session)); else localStorage.removeItem(SESS_KEY); }catch(e){} }
+
+function showToast(msg, isErr){
+  var t=$("toast"); t.className="toast"+(isErr?" err":"");
+  t.innerHTML='<i data-lucide="'+(isErr?"alert-triangle":"check-circle-2")+'" width="15" height="15" style="color:'+(isErr?'var(--danger)':'var(--accent2)')+'"></i><span></span>';
+  t.querySelector("span").textContent=msg; t.classList.remove("hidden");
+  if(window.lucide&&lucide.createIcons) lucide.createIcons();
+  if(toastTimer) clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){t.classList.add("hidden");},2600);
+}
+
+/* ================= Auth views ================= */
+function renderAuth(){
+  var hasOwner = state.db.accounts.some(function(a){return a.role==="dono";});
+  $("firstRun").classList.toggle("hidden", hasOwner);
+  $("loginForm").classList.toggle("hidden", !hasOwner);
+  $("registerForm").classList.add("hidden");
+  if(hasOwner) renderAccountList();
+}
+var selectedUserId = null;
+function renderAccountList(){
+  var list=$("accountList");
+  list.innerHTML = state.db.accounts.map(function(a){
+    return '<div class="account-item '+(selectedUserId===a.id?"active":"")+'" data-id="'+a.id+'"><div class="avatar '+(a.role==="dono"?"":"emp")+'">'+esc(initials(a.nome))+'</div><div><div class="nm">'+esc(a.nome)+'</div><div class="rl">'+(a.role==="dono"?"Dono":"Funcionário")+' · @'+esc(a.usuario)+'</div></div></div>';
+  }).join("");
+  list.querySelectorAll(".account-item").forEach(function(el){
+    el.addEventListener("click", function(){ selectedUserId=el.getAttribute("data-id"); renderAccountList(); $("lPass").focus(); });
+  });
+}
+
+$("oBtn").addEventListener("click", function(){
+  var nome=$("oNome").value.trim(), usuario=$("oUser").value.trim().toLowerCase(), pass=$("oPass").value;
+  var err=$("oErr");
+  if(!nome||!usuario){ err.textContent="Preencha nome e usuário."; return; }
+  if(pass.length<4){ err.textContent="Senha com no mínimo 4 caracteres."; return; }
+  if(state.db.accounts.some(function(a){return a.usuario===usuario;})){ err.textContent="Este usuário já existe."; return; }
+  state.db.accounts.push({id:"u"+Date.now(), nome:nome, usuario:usuario, senha:hash(pass), role:"dono", createdAt:nowISO()});
+  saveDB(); showToast("Conta de dono criada. Bem-vindo!");
+  doLogin(usuario);
+});
+
+$("showRegister").addEventListener("click", function(){ $("loginForm").classList.add("hidden"); $("registerForm").classList.remove("hidden"); });
+$("backToLogin").addEventListener("click", function(){ $("registerForm").classList.add("hidden"); $("loginForm").classList.remove("hidden"); });
+$("rBtn").addEventListener("click", function(){
+  var nome=$("rNome").value.trim(), usuario=$("rUser").value.trim().toLowerCase(), pass=$("rPass").value;
+  var err=$("rErr");
+  if(!nome||!usuario){ err.textContent="Preencha nome e usuário."; return; }
+  if(pass.length<4){ err.textContent="Senha com no mínimo 4 caracteres."; return; }
+  if(state.db.accounts.some(function(a){return a.usuario===usuario;})){ err.textContent="Este usuário já existe."; return; }
+  state.db.accounts.push({id:"u"+Date.now(), nome:nome, usuario:usuario, senha:hash(pass), role:"funcionario", createdAt:nowISO()});
+  saveDB(); showToast("Conta criada. Faça login.");
+  $("registerForm").classList.add("hidden"); $("loginForm").classList.remove("hidden");
+  selectedUserId=null; renderAccountList();
+});
+
+$("lBtn").addEventListener("click", function(){
+  var err=$("lErr");
+  if(!selectedUserId){ err.textContent="Selecione uma conta."; return; }
+  var acc=state.db.accounts.find(function(a){return a.id===selectedUserId;});
+  if(!acc){ err.textContent="Conta não encontrada."; return; }
+  if(acc.senha!==hash($("lPass").value)){ err.textContent="Senha incorreta."; return; }
+  doLogin(acc.usuario);
+});
+$("lPass").addEventListener("keydown", function(e){ if(e.key==="Enter") $("lBtn").click(); });
+
+function doLogin(usuario){
+  var acc=state.db.accounts.find(function(a){return a.usuario===usuario;});
+  state.session={userId:acc.id}; saveSession();
+  $("lPass").value=""; $("oPass").value=""; $("rPass").value="";
+  enterApp();
+}
+$("logoutBtn").addEventListener("click", function(){
+  leaveMeeting(); state.session=null; saveSession();
+  $("viewApp").classList.add("hidden"); $("viewLogin").classList.remove("hidden");
+  selectedUserId=null; renderAuth(); refreshIcons();
+});
+
+function enterApp(){
+  $("viewLogin").classList.add("hidden"); $("viewApp").classList.remove("hidden");
+  var u=currentUser();
+  $("hdrName").textContent=u.nome;
+  $("hdrRole").textContent=u.role==="dono"?"dono":"funcionário";
+  $("hdrRole").className="role-badge "+(u.role==="dono"?"dono":"func");
+  document.body.classList.toggle("is-dono", u.role==="dono");
+  if(u.role!=="dono") state.tab="reuniao";
+  var av=$("hdrAvatar"); av.textContent=initials(u.nome); av.className="avatar"+(u.role==="dono"?"":" emp");
+  switchTab("inicio"); renderApp(); startClock();
+}
+
+/* ================= Tabs ================= */
+document.querySelectorAll(".tab-btn").forEach(function(b){
+  b.addEventListener("click", function(){ switchTab(b.getAttribute("data-tab")); });
+});
+function switchTab(t){
+  if(!isDono() && t!=="reuniao") t="reuniao";
+  state.tab=t;
+  document.querySelectorAll(".tab-btn").forEach(function(b){b.classList.toggle("active", b.getAttribute("data-tab")===t);});
+  ["inicio","ponto","reuniao","equipe","anuncios"].forEach(function(x){ $("tab-"+x).classList.toggle("hidden", x!==t); });
+  renderApp();
+}
+
+/* ================= Clock & elapsed ================= */
+function startClock(){
+  if(clockTimer) clearInterval(clockTimer);
+  function tick(){
+    var d=new Date();
+    var el=$("clockNow"); if(el) el.textContent=String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0")+":"+String(d.getSeconds()).padStart(2,"0");
+    var open=openPonto();
+    if(open){
+      var ms=Date.now()-new Date(open.entradaISO).getTime();
+      var h=Math.floor(ms/3600000), m=Math.floor(ms/60000)%60, s=Math.floor(ms/1000)%60;
+      var et=$("elapsedTime"); if(et) et.textContent=String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+    }
+    var mt=$("meetTimer"); if(mt && state.db.meeting){ var mm=Math.floor((Date.now()-state.db.meeting.startedAt)/60000); var hh=Math.floor(mm/60); mt.textContent=String(hh).padStart(2,"0")+":"+String(mm%60).padStart(2,"0"); }
+  }
+  tick(); clockTimer=setInterval(tick, 1000);
+}
+
+/* ================= Ponto ================= */
+function openPonto(){
+  var u=currentUser(); if(!u) return null;
+  return state.db.ponto.find(function(p){return p.userId===u.id && p.date===todayStr() && !p.saida;}) || null;
+}
+function monthMinutes(userId){
+  var ym=todayStr().slice(0,7);
+  return state.db.ponto.filter(function(p){return p.userId===userId && p.date.slice(0,7)===ym && p.minutos!=null;}).reduce(function(s,p){return s+p.minutos;},0);
+}
+function todayMinutes(){
+  var u=currentUser(); if(!u) return 0;
+  var p=state.db.ponto.find(function(x){return x.userId===u.id && x.date===todayStr();});
+  if(!p) return 0;
+  if(p.minutos!=null) return p.minutos;
+  return Math.round((Date.now()-new Date(p.entradaISO).getTime())/60000);
+}
+
+$("pontoBtn").addEventListener("click", function(){
+  var u=currentUser(); var open=openPonto();
+  if(!open){
+    state.db.ponto.push({userId:u.id, date:todayStr(), entrada:fmtHM(new Date()), entradaISO:nowISO(), saida:null, minutos:null});
+    saveDB(); showToast("Entrada registrada. Bom trabalho!");
+  } else {
+    open.saida=fmtHM(new Date());
+    open.minutos=Math.max(0, Math.round((Date.now()-new Date(open.entradaISO).getTime())/60000));
+    saveDB(); showToast("Saída registrada. Total: "+fmtDur(open.minutos));
+  }
+  renderApp();
+});
+
+function renderPonto(){
+  var open=openPonto();
+  $("elapsedWrap").classList.toggle("hidden", !open);
+  var btn=$("pontoBtn"), txt=$("pontoBtnText"), st=$("pontoStatus");
+  if(open){ btn.className="big-btn out"; txt.textContent="Bater ponto — Saída"; btn.querySelector("svg, i") && (btn.innerHTML='<i data-lucide="log-out" width="18" height="18"></i><span id="pontoBtnText">Bater ponto — Saída</span>'); st.textContent="Você está em horário de trabalho. Entrada às "+open.entrada+"."; st.className="ponto-status on"; }
+  else { btn.className="big-btn in"; btn.innerHTML='<i data-lucide="log-in" width="18" height="18"></i><span id="pontoBtnText">Bater ponto — Entrada</span>'; st.textContent="Você não está em horário de trabalho."; st.className="ponto-status"; }
+  // history (self) — owner sees toggle
+  var u=currentUser();
+  var wrap=$("teamToggleWrap");
+  if(isDono()){
+    wrap.classList.remove("hidden");
+    if(!wrap.querySelector(".pill")){
+      wrap.innerHTML='<span class="pill active" data-v="eu">Eu</span><span class="pill" data-v="todos">Todos</span>';
+      wrap.querySelectorAll(".pill").forEach(function(p){ p.addEventListener("click", function(){
+        wrap.querySelectorAll(".pill").forEach(function(x){x.classList.toggle("active", x===p);});
+        state.pontoView=p.getAttribute("data-v"); renderPontoTable();
+      });});
+    }
+  } else { wrap.classList.add("hidden"); state.pontoView="eu"; }
+  renderPontoTable();
+}
+function renderPontoTable(){
+  var u=currentUser();
+  var rows = state.pontoView==="todos" ? state.db.ponto.slice() : state.db.ponto.filter(function(p){return p.userId===u.id;});
+  rows.sort(function(a,b){return b.date.localeCompare(a.date);});
+  rows=rows.slice(0,20);
+  var tb=$("pontoTable").querySelector("tbody");
+  var showUser = state.pontoView==="todos";
+  var thead=$("pontoTable").querySelector("thead tr");
+  thead.innerHTML = (showUser?'<th>Usuário</th>':'')+'<th>Data</th><th>Entrada</th><th>Saída</th><th>Total</th>';
+  if(!rows.length){ tb.innerHTML=""; $("pontoEmpty").classList.remove("hidden"); return; }
+  $("pontoEmpty").classList.add("hidden");
+  tb.innerHTML=rows.map(function(p){
+    var unome = (state.db.accounts.find(function(a){return a.id===p.userId;})||{}).nome || "—";
+    return '<tr>'+(showUser?'<td>'+esc(unome)+'</td>':'')+'<td class="tnum">'+p.date+'</td><td class="tnum">'+p.entrada+'</td><td class="tnum">'+(p.saida||"em aberto")+'</td><td class="tnum pos">'+(p.minutos!=null?fmtDur(p.minutos):"—")+'</td></tr>';
+  }).join("");
+}
+
+/* ================= Reunião (call) ================= */
+function inMeet(){ return !!(state.db.meeting && state.db.meeting.participants && state.db.meeting.participants.some(function(p){return p.userId===state.session.userId;})); }
+function joinMeeting(){
+  var u=currentUser();
+  if(!state.db.meeting.participants.some(function(p){return p.userId===u.id;}))
+    state.db.meeting.participants.push({userId:u.id, nome:u.nome, joinedAt:nowISO()});
+  saveDB(); renderApp();
+}
+function leaveMeeting(){
+  if(!state.db.meeting) return;
+  state.db.meeting.participants = state.db.meeting.participants.filter(function(p){return p.userId!==state.session.userId;});
+  saveDB();
+}
+function renderReuniao(){
+  var card=$("meetCard"); var u=currentUser(); var m=state.db.meeting;
+  $("meetDot").classList.toggle("hidden", !m);
+  if(!m){
+    if(isDono()){
+      card.innerHTML='<h3><span class="ico"><i data-lucide="video" width="16" height="16"></i></span>Reunião / Call</h3><p class="muted" style="margin-bottom:16px">Nenhuma reunião ativa. Como <strong style="color:var(--accent)">dono</strong>, você pode iniciar uma agora — os funcionários verão o indicador ao vivo e poderão entrar.</p><button class="big-btn in" id="startMeetBtn" style="max-width:340px;margin:0 auto;display:flex"><i data-lucide="video" width="18" height="18"></i>Iniciar reunião</button><div class="notice">Interface de reunião simulada (sem vídeo/áudio real entre dispositivos — requer backend/serviço de WebRTC). Funciona entre abas do mesmo navegador.</div>';
+      $("startMeetBtn").addEventListener("click", function(){
+        var code="DAR-"+Math.floor(1000+Math.random()*9000);
+        state.db.meeting={code:code, startedAt:Date.now(), startedBy:u.id, participants:[], chat:[]};
+        saveDB(); joinMeeting(); showToast("Reunião "+code+" iniciada.");
+      });
+    } else {
+      card.innerHTML='<h3><span class="ico"><i data-lucide="video" width="16" height="16"></i></span>Reunião / Call</h3><div style="text-align:center;padding:30px 10px"><i data-lucide="hourglass" width="34" height="34" style="color:var(--muted);opacity:.6"></i><p class="muted" style="margin-top:12px">Nenhuma reunião ativa no momento.<br>Aguarde o <strong style="color:var(--accent)">dono</strong> iniciar uma chamada.</p></div>';
+    }
+    return;
+  }
+  // meeting active
+  var joined=inMeet();
+  var parts=m.participants;
+  var tiles=parts.map(function(p){
+    var isSelf=p.userId===u.id;
+    return '<div class="tile '+(isSelf?"self":"")+'">'+(isSelf && !state.mic?'<span class="mic-off"><i data-lucide="mic-off" width="14" height="14"></i></span>':'')+'<div class="av">'+esc(initials(p.nome))+'</div><div class="nm">'+esc(p.nome)+(isSelf?" (você)":"")+'</div><div class="st"><span class="live-dot"></span>ao vivo</div></div>';
+  }).join("");
+  if(parts.length<4){ var ph=4-Math.min(parts.length,3); for(var i=0;i<ph;i++) tiles+='<div class="tile placeholder"><i data-lucide="user-plus" width="22" height="22"></i>Aguardando participante…</div>'; }
+  var chatHtml=(m.chat||[]).map(function(c){
+    var d=new Date(c.at); return '<div class="chat-msg"><span class="au">'+esc(c.nome)+'</span>'+esc(c.text)+'<span class="tm">'+fmtHM(d)+'</span></div>';
+  }).join("") || '<div class="chat-msg muted" style="color:var(--muted)">Nenhuma mensagem. Seja o primeiro a falar!</div>';
+
+  var controls = joined
+    ? '<div class="meet-controls"><button class="ctrl-btn '+(state.mic?"":"off")+'" id="micBtn" title="Microfone"><i data-lucide="'+(state.mic?"mic":"mic-off")+'" width="18" height="18"></i></button><button class="ctrl-btn '+(state.cam?"":"off")+'" id="camBtn" title="Câmera"><i data-lucide="'+(state.cam?"video":"video-off")+'" width="18" height="18"></i></button><button class="ctrl-btn" id="leaveBtn" title="Sair"><i data-lucide="phone-off" width="18" height="18"></i></button>'+(isDono()?'<button class="ctrl-btn end" id="endBtn"><i data-lucide="x" width="16" height="16"></i>Encerrar reunião</button>':'')+'</div>'
+    : '';
+
+  card.innerHTML=
+    '<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px">'
+    +'<div><h3 style="margin-bottom:4px"><span class="ico"><span class="live-dot"></span></span>Reunião ao vivo</h3>'
+    +'<div class="muted" style="font-size:12.5px">Código: <span class="meeting-code">'+esc(m.code)+'</span> · <span id="meetTimer" class="meeting-timer">00:00</span></div></div>'
+    +(joined?'<span class="role-badge dono">você está na reunião</span>':'<button class="btn btn-gold" id="joinBtn" style="width:auto"><i data-lucide="log-in" width="15" height="15"></i>Entrar na reunião</button>')
+    +'</div>'
+    +(joined?'<div class="tiles">'+tiles+'</div>':'<p class="muted" style="margin:14px 0">'+parts.length+' participante(s) na chamada. Entre para ver a sala e o chat.</p>')
+    +controls
+    +(joined?'<div class="chat-box" id="chatBox">'+chatHtml+'</div><div class="chat-input-row"><input id="chatInput" placeholder="Digite uma mensagem…"><button id="chatSend">Enviar</button></div>':'')
+    +'<div class="notice">Chamada simulada (interface local). Para vídeo/áudio real entre dispositivos, integre um serviço como Jitsi, Daily ou Zoom. O chat e os participantes sincronizam entre abas deste navegador.</div>';
+
+  if(!joined){ var jb=$("joinBtn"); if(jb) jb.addEventListener("click", joinMeeting); }
+  else {
+    $("micBtn").addEventListener("click", function(){ state.mic=!state.mic; renderReuniao(); refreshIcons(); });
+    $("camBtn").addEventListener("click", function(){ state.cam=!state.cam; renderReuniao(); refreshIcons(); });
+    $("leaveBtn").addEventListener("click", function(){ leaveMeeting(); showToast("Você saiu da reunião."); renderApp(); });
+    if(isDono()) $("endBtn").addEventListener("click", function(){
+      if(!confirm("Encerrar a reunião para todos?")) return;
+      state.db.meeting=null; saveDB(); showToast("Reunião encerrada."); renderApp();
+    });
+    var cb=$("chatBox"); if(cb) cb.scrollTop=cb.scrollHeight;
+    function send(){ var inp=$("chatInput"); var t=inp.value.trim(); if(!t) return; state.db.meeting.chat.push({userId:u.id, nome:u.nome, text:t, at:nowISO()}); if(state.db.meeting.chat.length>80) state.db.meeting.chat.shift(); saveDB(); inp.value=""; renderReuniao(); }
+    $("chatSend").addEventListener("click", send);
+    $("chatInput").addEventListener("keydown", function(e){ if(e.key==="Enter") send(); });
+  }
+  refreshIcons();
+}
+
+/* ================= Equipe ================= */
+function renderEquipe(){
+  var tb=$("equipeTable").querySelector("tbody");
+  var ym=todayStr().slice(0,7);
+  $("equipeHint").textContent = isDono() ? "você é o dono — pode promover/excluir" : "somente o dono gerencia a equipe";
+  var fw=$("eqFormWrap");
+  if(isDono()){
+    fw.innerHTML='<div style="margin-bottom:18px;padding:16px;border:1px solid var(--border);border-radius:11px;background:rgba(0,0,0,.18)"><h3 style="margin-bottom:10px"><span class="ico"><i data-lucide="user-plus" width="15" height="15"></i></span>Adicionar funcion&aacute;rio (criar login)</h3><div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:10px" class="eq-form-grid"><input id="eqNome" placeholder="Nome completo"><input id="eqUser" placeholder="usu&aacute;rio (login)"><input id="eqPass" type="password" placeholder="senha (m&iacute;n. 4)"></div><button class="btn btn-gold" id="eqAddBtn" style="width:auto;margin-top:10px"><i data-lucide="plus" width="15" height="15"></i>Criar login</button><div class="muted" style="font-size:11.5px;margin-top:8px">O funcion&aacute;rio entra na tela inicial com esse usu&aacute;rio + senha e v&ecirc; apenas a reuni&atilde;o/call.</div></div>';
+    $("eqAddBtn").addEventListener("click", function(){
+      var n=$("eqNome").value.trim(), u=$("eqUser").value.trim().toLowerCase(), pw=$("eqPass").value;
+      if(!n||!u){ showToast("Preencha nome e usuário.", true); return; }
+      if(pw.length<4){ showToast("Senha com no mínimo 4 caracteres.", true); return; }
+      if(state.db.accounts.some(function(a){return a.usuario===u;})){ showToast("Este usuário já existe.", true); return; }
+      state.db.accounts.push({id:"u"+Date.now(), nome:n, usuario:u, senha:hash(pw), role:"funcionario", createdAt:nowISO()});
+      saveData(); $("eqNome").value=""; $("eqUser").value=""; $("eqPass").value="";
+      showToast("Login de "+n+" criado. Usuário: @"+u); renderApp();
+    });
+  } else { fw.innerHTML=""; }
+  tb.innerHTML=state.db.accounts.map(function(a){
+    var horas=state.db.ponto.filter(function(p){return p.userId===a.id && p.date.slice(0,7)===ym && p.minutos!=null;}).reduce(function(s,p){return s+p.minutos;},0);
+    var acts='';
+    if(isDono() && a.id!==currentUser().id){
+      acts='<button class="del-link" data-promote="'+a.id+'">'+(a.role==="dono"?"rebaixar":"promover a dono")+'</button> · <button class="del-link" data-del="'+a.id+'">excluir</button>';
+    }
+    return '<tr><td><div style="display:flex;align-items:center;gap:10px"><div class="avatar '+(a.role==="dono"?"":"emp")+'" style="width:30px;height:30px;font-size:12px">'+esc(initials(a.nome))+'</div>'+esc(a.nome)+'</div></td><td>@'+esc(a.usuario)+'</td><td><span class="role-badge '+(a.role==="dono"?"dono":"func")+'">'+(a.role==="dono"?"dono":"funcionário")+'</span></td><td class="tnum pos">'+fmtDur(horas)+'</td><td style="text-align:right">'+acts+'</td></tr>';
+  }).join("");
+  tb.querySelectorAll("[data-promote]").forEach(function(b){ b.addEventListener("click", function(){
+    var id=b.getAttribute("data-promote"); var a=state.db.accounts.find(function(x){return x.id===id;});
+    a.role = a.role==="dono" ? "funcionario" : "dono"; saveDB(); showToast("Cargo atualizado."); renderApp();
+  });});
+  tb.querySelectorAll("[data-del]").forEach(function(b){ b.addEventListener("click", function(){
+    var id=b.getAttribute("data-del"); var a=state.db.accounts.find(function(x){return x.id===id;});
+    if(!confirm("Excluir a conta de "+a.nome+"?")) return;
+    state.db.accounts=state.db.accounts.filter(function(x){return x.id!==id;});
+    state.db.ponto=state.db.ponto.filter(function(p){return p.userId!==id;});
+    saveDB(); showToast("Conta excluída."); renderApp();
+  });});
+}
+
+/* ================= Anúncios ================= */
+function renderAnuncios(){
+  var card=$("anunciosCard");
+  var form = isDono() ? '<div style="margin-bottom:18px;padding:16px;border:1px solid var(--border);border-radius:11px;background:rgba(0,0,0,.18)"><h3 style="margin-bottom:10px"><span class="ico"><i data-lucide="edit-3" width="15" height="15"></i></span>Novo anúncio (dono)</h3><div class="form-field"><label>Título</label><input id="anTitulo" placeholder="Ex: Reunião geral sexta"></div><div class="form-field"><label>Mensagem</label><textarea id="anTexto" rows="3" placeholder="Detalhes…"></textarea></div><button class="btn btn-gold" id="anBtn" style="width:auto"><i data-lucide="send" width="15" height="15"></i>Publicar</button></div>' : '';
+  var list = state.db.anuncios.slice().reverse().map(function(a){
+    var d=new Date(a.at);
+    var del = (isDono()||a.userId===currentUser().id) ? '<button class="del-link" data-delan="'+a.id+'"><i data-lucide="trash-2" width="12" height="12"></i>excluir</button>' : '';
+    return '<div class="anuncio"><div class="t">'+esc(a.titulo)+del+'</div><div class="m">'+esc(a.texto)+'</div><div class="meta">por '+esc(a.autor)+' · '+d.toLocaleDateString("pt-BR")+' '+fmtHM(d)+'</div></div>';
+  }).join("") || '<div class="empty-msg">Nenhum anúncio publicado.</div>';
+  card.innerHTML='<h3><span class="ico"><i data-lucide="megaphone" width="16" height="16"></i></span>Anúncios da empresa</h3>'+form+list;
+  if(isDono()) $("anBtn").addEventListener("click", function(){
+    var t=$("anTitulo").value.trim(), x=$("anTexto").value.trim();
+    if(!t||!x){ showToast("Preencha título e mensagem.", true); return; }
+    var u=currentUser();
+    state.db.anuncios.push({id:"a"+Date.now(), userId:u.id, autor:u.nome, titulo:t, texto:x, at:nowISO()});
+    saveDB(); $("anTitulo").value=""; $("anTexto").value=""; showToast("Anúncio publicado."); renderApp();
+  });
+  card.querySelectorAll("[data-delan]").forEach(function(b){ b.addEventListener("click", function(){
+    var id=b.getAttribute("data-delan"); state.db.anuncios=state.db.anuncios.filter(function(a){return a.id!==id;}); saveDB(); showToast("Anúncio excluído."); renderApp();
+  });});
+}
+
+/* ================= Início ================= */
+function renderInicio(){
+  var u=currentUser();
+  $("welcomeName").textContent=u.nome.split(" ")[0];
+  $("todayDate").textContent=new Date().toLocaleDateString("pt-BR",{weekday:"long", day:"numeric", month:"long", year:"numeric"});
+  $("statHours").textContent=fmtDur(todayMinutes());
+  $("statHoursMonth").textContent=fmtDur(monthMinutes(u.id));
+  $("statTeam").textContent=state.db.accounts.length;
+  var open=openPonto();
+  $("pontoQuick").innerHTML = open
+    ? '<p class="muted">Você está <strong class="pos">trabalhando</strong> desde '+open.entrada+'. <button class="link-btn" id="quickOut">Bater saída</button></p>'
+    : '<p class="muted">Ainda não bateu o ponto hoje. <button class="link-btn" id="quickIn">Bater entrada</button></p>';
+  var qi=$("quickIn"); if(qi) qi.addEventListener("click", function(){ $("pontoBtn").click(); });
+  var qo=$("quickOut"); if(qo) qo.addEventListener("click", function(){ $("pontoBtn").click(); });
+  // anuncios home (3)
+  var ah=state.db.anuncios.slice().reverse().slice(0,3);
+  $("anunciosHome").innerHTML = ah.length ? ah.map(function(a){ var d=new Date(a.at); return '<div class="anuncio" style="margin-bottom:10px"><div class="t">'+esc(a.titulo)+'</div><div class="m" style="font-size:12.5px">'+esc(a.texto).slice(0,120)+(esc(a.texto).length>120?"…":"")+'</div><div class="meta">por '+esc(a.autor)+' · '+d.toLocaleDateString("pt-BR")+'</div></div>'; }).join("") : '<p class="empty-msg" style="text-align:left;padding:6px 0">Nenhum anúncio ainda.</p>';
+  // meeting banner
+  var mb=$("meetBanner");
+  if(state.db.meeting){
+    mb.innerHTML='<h3><span class="ico"><span class="live-dot"></span></span>Reunião ao vivo: <span class="meeting-code">'+esc(state.db.meeting.code)+'</span><button class="btn btn-gold" id="bannerJoin" style="width:auto;margin-left:auto"><i data-lucide="video" width="15" height="15"></i>'+(inMeet()?"Ir para a reunião":"Entrar na reunião")+'</button></h3><p class="muted">Iniciada pelo dono. '+state.db.meeting.participants.length+' participante(s).</p>';
+    $("bannerJoin").addEventListener("click", function(){ if(!inMeet()) joinMeeting(); switchTab("reuniao"); });
+  } else { mb.innerHTML=""; mb.style.display="none"; }
+  if(state.db.meeting) mb.style.display="";
+}
+
+/* ================= Render all ================= */
+function renderApp(){
+  if(!currentUser()) return;
+  try{
+    renderInicio();
+    if(state.tab==="ponto") renderPonto();
+    if(state.tab==="reuniao") renderReuniao();
+    if(state.tab==="equipe") renderEquipe();
+    if(state.tab==="anuncios") renderAnuncios();
+    refreshIcons();
+  }catch(e){ showToast("Erro: "+(e&&e.message?e.message:e), true); }
+}
+function refreshIcons(){ if(window.lucide && lucide.createIcons) lucide.createIcons(); }
+
+/* sync across tabs */
+window.addEventListener("storage", function(e){
+  if(e.key===KEY){ try{ state.db=JSON.parse(e.newValue)||state.db; renderApp(); }catch(err){} }
+});
+
+/* boot */
+if(state.session && currentUser()) enterApp();
+else { renderAuth(); refreshIcons(); }
+})();
+</script>
+</body>
+</html>
